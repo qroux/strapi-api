@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "teams",
   "info": {
-    "name": "Teams"
+    "name": "Teams",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -10,22 +11,22 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "Name": {
+    "name": {
       "type": "string",
       "required": true,
       "unique": true
     },
-    "League": {
+    "league": {
       "type": "string",
       "required": true,
       "default": "Ligue 1"
     },
-    "Country": {
+    "country": {
       "type": "string",
       "required": true,
       "default": "France"
     },
-    "Logo_path": {
+    "logo_path": {
       "type": "string",
       "default": "../../../assets/real.svg.png"
     }

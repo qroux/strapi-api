@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "matches",
+  "info": {
+    "name": "Matches",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "date": {
+      "type": "datetime",
+      "required": true
+    },
+    "home": {
+      "model": "teams"
+    },
+    "visitor": {
+      "model": "teams"
+    },
+    "type": {
+      "type": "string",
+      "default": "Ligue 1",
+      "required": true
+    }
+  }
+}

@@ -22,6 +22,11 @@
       "type": "float",
       "required": true,
       "default": 1
+    },
+    "bookmaker": {
+      "type": "string",
+      "default": "Winamax",
+      "required": true
     }
   }
 }

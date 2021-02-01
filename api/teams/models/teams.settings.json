@@ -26,9 +26,14 @@
       "required": true,
       "default": "France"
     },
-    "logo_path": {
-      "type": "string",
-      "default": "../../../assets/real.svg.png"
+    "logo": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": true
     }
   }
 }

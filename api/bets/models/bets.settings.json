@@ -27,6 +27,17 @@
       "type": "string",
       "default": "Winamax",
       "required": true
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "enCours",
+        "Succes",
+        "Echec",
+        "Report"
+      ],
+      "required": true,
+      "default": "enCours"
     }
   }
 }

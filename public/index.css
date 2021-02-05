@@ -24,6 +24,10 @@ body {
   border-radius: 2px;
   box-shadow: rgb(227, 233, 243) 0px 2px 4px 0px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   color: var(--strong-grey);
 }
 

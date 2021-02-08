@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "positions",
+  "info": {
+    "name": "positions",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "users_permissions_user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "positions"
+    },
+    "bet": {
+      "model": "bets"
+    },
+    "value": {
+      "type": "decimal",
+      "required": true
+    },
+    "outcome": {
+      "type": "decimal"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "Attente",
+        "Gagnant",
+        "Perdu"
+      ],
+      "default": "Attente",
+      "required": true
+    },
+    "bankroll": {
+      "model": "bankrolls"
+    }
+  }
+}

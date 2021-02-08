@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/bankrolls",
+      "handler": "bankrolls.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/bankrolls/count",
+      "handler": "bankrolls.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/bankrolls/:id",
+      "handler": "bankrolls.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/bankrolls",
+      "handler": "bankrolls.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/bankrolls/:id",
+      "handler": "bankrolls.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/bankrolls/:id",
+      "handler": "bankrolls.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

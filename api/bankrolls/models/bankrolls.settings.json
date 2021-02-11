@@ -16,7 +16,7 @@
       "model": "user",
       "via": "bankrolls"
     },
-    "starter_balance": {
+    "starter": {
       "type": "decimal",
       "required": true
     },

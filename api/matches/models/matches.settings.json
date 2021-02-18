@@ -21,10 +21,15 @@
     "visitor": {
       "model": "teams"
     },
+    "slug": {
+      "type": "string",
+      "required": true,
+      "default": "HOME - VISITOR DD/MM/YY"
+    },
     "type": {
       "type": "string",
-      "default": "Ligue 1",
-      "required": true
+      "required": true,
+      "default": "Ligue 1"
     }
   }
 }

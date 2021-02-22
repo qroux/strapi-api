@@ -1,13 +1,15 @@
 "use strict";
 
-/**
- * Read the documentation (https://strapi.io/documentation/developer-docs/latest/concepts/controllers.html#core-controllers)
- * to customize this controller
- */
-
 module.exports = {
   async find(ctx) {
-    const bankrolls = await strapi.services.bankrolls.sanitized_find(ctx);
-    return bankrolls;
+    return await strapi.services.bankrolls.sanitizedFind(ctx);
+  },
+  async update(ctx) {
+    // UPDATE action for Bankroll.current_balance only
+    if (ctx.request.body.type === "current_balance") {
+      return await strapi.services.bankrolls.setCurrentBalance(ctx);
+    }
+
+    return "UPDATE TYPE: missing at request.body.type";
   },
 };

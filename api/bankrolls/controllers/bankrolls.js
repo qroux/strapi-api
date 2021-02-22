@@ -7,7 +7,7 @@
 
 module.exports = {
   async find(ctx) {
-    const sanitezed = await strapi.services.bankrolls.find(ctx);
-    return sanitezed;
+    const bankrolls = await strapi.services.bankrolls.sanitized_find(ctx);
+    return bankrolls;
   },
 };

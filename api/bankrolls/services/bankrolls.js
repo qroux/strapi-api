@@ -2,7 +2,7 @@
 const { sanitizeEntity } = require("strapi-utils");
 
 module.exports = {
-  async find(ctx) {
+  async sanitized_find(ctx) {
     let entities;
 
     // DEEP POPULATE SYNTAX

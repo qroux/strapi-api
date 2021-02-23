@@ -14,8 +14,8 @@ module.exports = {
       return err;
     }
 
-    return bankrolls.map((entity) =>
-      sanitizeEntity(entity, { model: strapi.models.bankrolls })
+    return bankrolls.map((bankroll) =>
+      sanitizeEntity(bankroll, { model: strapi.models.bankrolls })
     );
   },
   async setCurrentBalance(ctx) {

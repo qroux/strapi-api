@@ -2,6 +2,7 @@
 const { sanitizeEntity } = require("strapi-utils");
 
 module.exports = {
+  // FIND
   async populatedFind(ctx) {
     let positions;
 
@@ -10,8 +11,6 @@ module.exports = {
       positions = await strapi
         .query("positions")
         .find(ctx.query, ["bet", { path: "bet", populate: "match" }]);
-
-      console.log("positions =", typeof positions, positions);
     } catch (err) {
       return `populatedFind Error => ${err}`;
     }

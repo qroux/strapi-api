@@ -2,14 +2,17 @@
 const { sanitizeEntity } = require("strapi-utils");
 
 module.exports = {
+  // FIND
   async sanitizedFind(ctx) {
     let bankrolls;
-    // DEEP POPULATE SYNTAX
+
     try {
-      bankrolls = await strapi.query("bankrolls").find(ctx.query, {
-        path: "positions",
-        populate: [{ path: "bet", populate: [{ path: "match" }] }],
-      });
+      bankrolls = await strapi
+        .query("bankrolls")
+        .find(ctx.query, [
+          "positions",
+          { path: "bet", populate: [{ path: "match" }] },
+        ]);
     } catch (err) {
       return err;
     }
@@ -18,6 +21,8 @@ module.exports = {
       sanitizeEntity(bankroll, { model: strapi.models.bankrolls })
     );
   },
+  // UPDATE
+  // type === "current_balance"
   async setCurrentBalance(ctx) {
     let bankroll;
     let sum = 0;

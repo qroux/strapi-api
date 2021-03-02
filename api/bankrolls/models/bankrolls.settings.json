@@ -26,11 +26,11 @@
       "default": "ma bankroll",
       "minLength": 3
     },
-    "positions": {
-      "collection": "positions"
-    },
     "current_balance": {
       "type": "decimal"
+    },
+    "positions": {
+      "collection": "positions"
     }
   }
 }

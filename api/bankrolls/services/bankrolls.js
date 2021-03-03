@@ -56,4 +56,26 @@ module.exports = {
 
     return sanitizeEntity(updatedBankroll, { model: strapi.models.bankrolls });
   },
+  // type === "add_position"
+  async setPositions(ctx) {
+    let bankroll;
+    let updatedBankroll;
+
+    try {
+      bankroll = await strapi.query("bankrolls").findOne({ id: ctx.params.id });
+      const updatedPositions = [
+        ...bankroll.positions,
+        ctx.request.body.position_id,
+      ];
+      bankroll.positions = updatedPositions;
+
+      updatedBankroll = await strapi
+        .query("bankrolls")
+        .update({ id: ctx.params.id }, bankroll);
+    } catch (err) {
+      return err;
+    }
+
+    return sanitizeEntity(updatedBankroll, { model: strapi.models.bankrolls });
+  },
 };

@@ -10,6 +10,10 @@ module.exports = {
       return await strapi.services.bankrolls.setCurrentBalance(ctx);
     }
 
+    if (ctx.request.body.type === "add_position") {
+      return await strapi.services.bankrolls.setPositions(ctx);
+    }
+
     return "UPDATE TYPE: missing at request.body.type";
   },
 };

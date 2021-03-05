@@ -58,16 +58,40 @@ module.exports = {
   },
   // type === "add_position"
   async setPositions(ctx) {
+    // @params: bankroll_id
+    // @request.body: position_id
     let bankroll;
     let updatedBankroll;
 
     try {
       bankroll = await strapi.query("bankrolls").findOne({ id: ctx.params.id });
-      const updatedPositions = [
+      bankroll.positions = [
         ...bankroll.positions,
         ctx.request.body.position_id,
       ];
-      bankroll.positions = updatedPositions;
+
+      updatedBankroll = await strapi
+        .query("bankrolls")
+        .update({ id: ctx.params.id }, bankroll);
+    } catch (err) {
+      return err;
+    }
+
+    return sanitizeEntity(updatedBankroll, { model: strapi.models.bankrolls });
+  },
+  async deletePosition(ctx) {
+    // @params: bankroll_id
+    // @request.body: position_id
+    let bankroll;
+    let updatedBankroll;
+
+    try {
+      bankroll = await strapi.query("bankrolls").findOne({ id: ctx.params.id });
+      bankroll.positions = [
+        ...bankroll.positions.filter(
+          (position) => position.id !== ctx.request.body.position_id
+        ),
+      ];
 
       updatedBankroll = await strapi
         .query("bankrolls")

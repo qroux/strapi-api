@@ -7,9 +7,9 @@ module.exports = ({ env }) => ({
         host: env("DATABASE_HOST", "127.0.0.1"),
         srv: env.bool("DATABASE_SRV", false),
         port: env.int("DATABASE_PORT", 27017),
-        database: env("DATABASE_NAME", "test-strapi-api"),
-        username: env("DATABASE_USERNAME", "admin"),
-        password: env("DATABASE_PASSWORD", "passwordpassword"),
+        database: env("DATABASE_NAME", "test-strapi"),
+        username: env("DATABASE_USERNAME", ""),
+        password: env("DATABASE_PASSWORD", ""),
       },
       options: {
         authenticationDatabase: env("AUTHENTICATION_DATABASE", null),

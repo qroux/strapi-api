@@ -24,3 +24,5 @@ afterAll(async (done) => {
 it("strapi is defined", () => {
   expect(strapi).toBeDefined();
 });
+
+require("./user");

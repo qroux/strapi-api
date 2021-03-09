@@ -10,62 +10,70 @@ const mockUserData = {
   blocked: null,
 };
 
-it("should login user and return jwt token", async (done) => {
-  /** Creates a new user and save it to the database */
-  await strapi.plugins["users-permissions"].services.user.add({
-    ...mockUserData,
+describe("User Crud and authenticated request tests", () => {
+  beforeEach(async () => {
+    //Delete all user to prevent duplictated user
+    await strapi.plugins["users-permissions"].services.user.removeAll();
+    console.log("reset");
   });
 
-  await request(strapi.server) // app server is an instance of Class: http.Server
-    .post("/auth/local")
-    .set("accept", "application/json")
-    .set("Content-Type", "application/json")
-    .send({
-      identifier: mockUserData.email,
-      password: mockUserData.password,
-    })
-    .expect("Content-Type", /json/)
-    .expect(200)
-    .then((data) => {
-      expect(data.body.jwt).toBeDefined();
+  it("should login user and return jwt token", async (done) => {
+    /** Creates a new user and save it to the database */
+    await strapi.plugins["users-permissions"].services.user.add({
+      ...mockUserData,
     });
 
-  done();
-});
+    await request(strapi.server) // app server is an instance of Class: http.Server
+      .post("/auth/local")
+      .set("accept", "application/json")
+      .set("Content-Type", "application/json")
+      .send({
+        identifier: mockUserData.email,
+        password: mockUserData.password,
+      })
+      .expect("Content-Type", /json/)
+      .expect(200)
+      .then((data) => {
+        expect(data.body.jwt).toBeDefined();
+      });
 
-it("should return users data for authenticated user", async (done) => {
-  /** Gets the default user role */
-  const defaultRole = await strapi
-    .query("role", "users-permissions")
-    .findOne({}, []);
-
-  const role = defaultRole ? defaultRole.id : null;
-
-  /** Creates a new user an push to database */
-  const user = await strapi.plugins["users-permissions"].services.user.add({
-    ...mockUserData,
-    username: "tester2",
-    email: "tester2@strapi.com",
-    role,
+    done();
   });
 
-  const jwt = strapi.plugins["users-permissions"].services.jwt.issue({
-    id: user.id,
-  });
+  it("should return users data for authenticated user", async (done) => {
+    /** Gets the default user role */
+    const defaultRole = await strapi
+      .query("role", "users-permissions")
+      .findOne({}, []);
 
-  await request(strapi.server) // app server is an instance of Class: http.Server
-    .get("/users/me")
-    .set("accept", "application/json")
-    .set("Content-Type", "application/json")
-    .set("Authorization", "Bearer " + jwt)
-    .expect("Content-Type", /json/)
-    .expect(200)
-    .then((data) => {
-      expect(data.body).toBeDefined();
-      expect(data.body.id).toBe(user.id);
-      expect(data.body.username).toBe(user.username);
-      expect(data.body.email).toBe(user.email);
+    const role = defaultRole ? defaultRole.id : null;
+
+    /** Creates a new user an push to database */
+    const user = await strapi.plugins["users-permissions"].services.user.add({
+      ...mockUserData,
+      username: "tester2",
+      email: "tester2@strapi.com",
+      role,
     });
 
-  done();
+    const jwt = strapi.plugins["users-permissions"].services.jwt.issue({
+      id: user.id,
+    });
+
+    await request(strapi.server) // app server is an instance of Class: http.Server
+      .get("/users/me")
+      .set("accept", "application/json")
+      .set("Content-Type", "application/json")
+      .set("Authorization", "Bearer " + jwt)
+      .expect("Content-Type", /json/)
+      .expect(200)
+      .then((data) => {
+        expect(data.body).toBeDefined();
+        expect(data.body.id).toBe(user.id);
+        expect(data.body.username).toBe(user.username);
+        expect(data.body.email).toBe(user.email);
+      });
+
+    done();
+  });
 });

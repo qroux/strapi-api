@@ -5,6 +5,9 @@ const {
   destroyTestUser,
 } = require("./helpers/user");
 
+//////////////////////////////////////////////////////////////////
+// GENERAL TEST SETUP | AUTHENTICATION + AUTHENTICATED REQUESTS //
+//////////////////////////////////////////////////////////////////
 let testUserID = undefined;
 
 beforeAll(async (done) => {
@@ -35,12 +38,10 @@ it("Test user can be fetched with testUserID variable defined", async (done) => 
   done();
 });
 
-// it("Test User is defined", async (done) => {
-//   expect(testuserID).toBeDefined();
+//////////////////////////////
+// CONTROLLER TESTS IMPORTS //
+//////////////////////////////
 
-//   done();
-// });
-
-// require("./user");
+require("./user");
 // require("./teams");
 // require("./matches");

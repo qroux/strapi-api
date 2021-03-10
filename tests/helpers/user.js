@@ -1,4 +1,4 @@
-// const request = require("supertest");
+const request = require("supertest");
 
 // user mock data
 const mockUserData = {
@@ -25,6 +25,17 @@ async function newTestUser() {
   return user.id;
 }
 
+async function getTestUser() {
+  return await request(strapi.server)
+    .post("/auth/local")
+    .set("accept", "application/json")
+    .set("Content-Type", "application/json")
+    .send({
+      identifier: mockUserData.email,
+      password: mockUserData.password,
+    });
+}
+
 async function resetTestUser() {
   await strapi.plugins["users-permissions"].services.user.remove({
     email: mockUserData.email,
@@ -37,4 +48,10 @@ async function destroyTestUser() {
   });
 }
 
-module.exports = { newTestUser, resetTestUser, destroyTestUser };
+module.exports = {
+  newTestUser,
+  getTestUser,
+  resetTestUser,
+  destroyTestUser,
+  mockUserData,
+};

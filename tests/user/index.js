@@ -11,10 +11,10 @@ const mockUserData = {
 };
 
 describe("User Crud and authenticated request tests", () => {
-  beforeEach(async () => {
-    //Delete all user to prevent duplictated user
+  beforeEach(async (done) => {
     await strapi.plugins["users-permissions"].services.user.removeAll();
-    console.log("reset");
+
+    done();
   });
 
   it("should login user and return jwt token", async (done) => {

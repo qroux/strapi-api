@@ -11,4 +11,5 @@ it("strapi is defined", () => {
   expect(strapi).toBeDefined();
 });
 
-require("./user");
+// require("./user");
+require("./teams");

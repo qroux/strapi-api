@@ -11,12 +11,6 @@ const mockUserData = {
 };
 
 describe("User Crud and authenticated request tests", () => {
-  beforeEach(async (done) => {
-    await strapi.plugins["users-permissions"].services.user.removeAll();
-
-    done();
-  });
-
   it("should login user and return jwt token", async (done) => {
     /** Creates a new user and save it to the database */
     await strapi.plugins["users-permissions"].services.user.add({

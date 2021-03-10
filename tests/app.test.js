@@ -1,15 +1,46 @@
-const fs = require("fs");
 const { setupStrapi } = require("./helpers/strapi");
+const {
+  newTestUser,
+  resetTestUser,
+  destroyTestUser,
+} = require("./helpers/user");
 
-/** this code is called once before any test is called */
+let testUserID = undefined;
+
 beforeAll(async (done) => {
-  await setupStrapi(); // singleton so it can be called many times
+  await setupStrapi();
+  await resetTestUser();
+  testUserID = await newTestUser(); // newTestUser() => returns user id
+
   done();
 });
 
-it("strapi is defined", () => {
-  expect(strapi).toBeDefined();
+afterAll(async (done) => {
+  await destroyTestUser();
+  done();
 });
 
+it("strapi is defined", (done) => {
+  expect(strapi).toBeDefined();
+  done();
+});
+
+it("Test user can be fetched with testUserID variable defined", async (done) => {
+  const user = await strapi.plugins["users-permissions"].services.user.fetch({
+    id: testUserID,
+  });
+
+  expect(testUserID).toBeDefined();
+  expect(user.email).toEqual("test@test.com");
+  done();
+});
+
+// it("Test User is defined", async (done) => {
+//   expect(testuserID).toBeDefined();
+
+//   done();
+// });
+
 // require("./user");
-require("./teams");
+// require("./teams");
+// require("./matches");

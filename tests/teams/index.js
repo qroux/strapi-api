@@ -18,7 +18,7 @@ let userJWT =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMGFkOWZlMjYyMzIxMDAxNTQxZGYxZSIsImlhdCI6MTYxMzA3NTI3OCwiZXhwIjoxNjE1NjY3Mjc4fQ.6tFxwnUv_5-CjQWYrcrBhfjZKccudHO-aGiXGi_9-Ok";
 let teamId = "";
 
-describe("Teams Collection CRUD tests", () => {
+describe("Teams CRUD", () => {
   it("CREATE team if all required params provided", async (done) => {
     const response = await request(strapi.server)
       .post("/teams")

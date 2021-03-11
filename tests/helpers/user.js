@@ -10,6 +10,9 @@ const mockUserData = {
   blocked: false,
 };
 
+const userJWT =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMGFkOWZlMjYyMzIxMDAxNTQxZGYxZSIsImlhdCI6MTYxMzA3NTI3OCwiZXhwIjoxNjE1NjY3Mjc4fQ.6tFxwnUv_5-CjQWYrcrBhfjZKccudHO-aGiXGi_9-Ok";
+
 async function newTestUser() {
   const defaultRole = await strapi
     .query("role", "users-permissions")
@@ -54,4 +57,5 @@ module.exports = {
   resetTestUser,
   destroyTestUser,
   mockUserData,
+  userJWT,
 };

@@ -42,8 +42,8 @@ it("Test user can be fetched with testUserID variable defined", async (done) => 
 // CONTROLLER TESTS IMPORTS //
 //////////////////////////////
 
-// require("./user");
+require("./user");
 // require("./teams");
 // require("./matches");
-require("./bets");
-// require("./positions");
+// require("./bets");
+require("./positions");

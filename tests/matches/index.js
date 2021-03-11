@@ -49,9 +49,33 @@ describe("Match CRUD", () => {
         expect(res.body.type).toEqual(mockMatchData.type);
         expect(res.body.slug).toEqual(mockMatchData.slug);
         expect(res.body.home).toBeDefined();
-        expect(mongoose.Types.ObjectId.isValid(res.body.home)).toEqual(true);
+        // check res.body.home.id because res.body.home === Object => reference is automatically populated by strapi
+        expect(mongoose.Types.ObjectId.isValid(res.body.home.id)).toEqual(true);
         expect(res.body.visitor).toBeDefined();
-        expect(mongoose.Types.ObjectId.isValid(res.body.visitor)).toEqual(true);
+        expect(mongoose.Types.ObjectId.isValid(res.body.visitor.id)).toEqual(
+          true
+        );
+      });
+
+    done();
+  });
+
+  it("UPDATE match at id", async (done) => {
+    const updatedSlug = "MODIFIED MOCKED PSG - REAL 29/01/21 21h00";
+
+    await request(strapi.server)
+      .put(`/matches/${matchID}`)
+      .set("accept", "application/json")
+      .set("Content-Type", "application/json")
+      .set("Authorization", `Bearer ${userJWT}`)
+      .send({ ...mockMatchData, slug: updatedSlug })
+      .expect("Content-Type", /json/)
+      .expect(200)
+      .then((res) => {
+        expect(res.body.slug).toEqual(updatedSlug);
+        expect(res.body.type).toEqual(mockMatchData.type);
+        expect(res.body.home).toBeDefined();
+        expect(res.body.visitor).toBeDefined();
       });
 
     done();

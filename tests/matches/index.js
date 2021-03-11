@@ -80,4 +80,15 @@ describe("Match CRUD", () => {
 
     done();
   });
+
+  it("DELETE match at id", async (done) => {
+    await request(strapi.server)
+      .delete(`/matches/${matchID}`)
+      .set("Authorization", `Bearer ${userJWT}`)
+      .send()
+      .expect("Content-Type", /json/)
+      .expect(200);
+
+    done();
+  });
 });

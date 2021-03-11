@@ -44,4 +44,6 @@ it("Test user can be fetched with testUserID variable defined", async (done) => 
 
 // require("./user");
 // require("./teams");
-require("./matches");
+// require("./matches");
+require("./bets");
+// require("./positions");

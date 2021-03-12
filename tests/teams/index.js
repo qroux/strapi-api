@@ -1,4 +1,5 @@
 const request = require("supertest");
+const { userInstance } = require("../helpers/user");
 
 // TEAMS COLLECTION PARAMS
 // @@name!: string
@@ -14,8 +15,6 @@ const mockTeamData = {
   status: "published",
 };
 
-let userJWT =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMGFkOWZlMjYyMzIxMDAxNTQxZGYxZSIsImlhdCI6MTYxMzA3NTI3OCwiZXhwIjoxNjE1NjY3Mjc4fQ.6tFxwnUv_5-CjQWYrcrBhfjZKccudHO-aGiXGi_9-Ok";
 let teamId = "";
 
 describe("Team CRUD", () => {
@@ -24,7 +23,7 @@ describe("Team CRUD", () => {
       .post("/teams")
       .set("accept", "application/json")
       .set("Content-Type", "application/json")
-      .set("Authorization", `Bearer ${userJWT}`)
+      .set("Authorization", `Bearer ${userInstance.JWT}`)
       .send(mockTeamData)
       .expect("Content-Type", /json/)
       .expect(200);
@@ -37,7 +36,7 @@ describe("Team CRUD", () => {
   it(`GET team at id ${teamId}`, async (done) => {
     await request(strapi.server)
       .get(`/teams/${teamId}`)
-      .set("Authorization", `Bearer ${userJWT}`)
+      .set("Authorization", `Bearer ${userInstance.JWT}`)
       .send()
       .expect("Content-Type", /json/)
       .expect(200)
@@ -55,7 +54,7 @@ describe("Team CRUD", () => {
       .put(`/teams/${teamId}`)
       .set("accept", "application/json")
       .set("Content-Type", "application/json")
-      .set("Authorization", `Bearer ${userJWT}`)
+      .set("Authorization", `Bearer ${userInstance.JWT}`)
       .send({ ...mockTeamData, name: updatedName })
       .expect("Content-Type", /json/)
       .expect(200)
@@ -69,7 +68,7 @@ describe("Team CRUD", () => {
   it(`DELETE team at id ${teamId}`, async (done) => {
     await request(strapi.server)
       .delete(`/teams/${teamId}`)
-      .set("Authorization", `Bearer ${userJWT}`)
+      .set("Authorization", `Bearer ${userInstance.JWT}`)
       .send()
       .expect("Content-Type", /json/)
       .expect(200);

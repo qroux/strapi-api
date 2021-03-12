@@ -2,7 +2,7 @@ const request = require("supertest");
 const { userInstance } = require("../helpers/user");
 
 describe("User CRUD", () => {
-  it("should login user and return jwt token", async (done) => {
+  it("should login user and return JWT token", async (done) => {
     await request(strapi.server)
       .post("/auth/local")
       .set("accept", "application/json")

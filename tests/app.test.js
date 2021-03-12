@@ -18,7 +18,7 @@ afterAll(async (done) => {
   done();
 });
 
-it("strapi is defined", (done) => {
+it("GENERATE global strapi instance", (done) => {
   expect(strapi).toBeDefined();
   done();
 });
@@ -45,7 +45,7 @@ it("GENERATE valid JWT for userInstance for authenticated request", async (done)
 // CONTROLLER TESTS IMPORTS //
 //////////////////////////////
 
-// require("./user");
+require("./user");
 // require("./teams");
 // require("./matches");
 // require("./bets");

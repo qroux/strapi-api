@@ -1,5 +1,5 @@
 const request = require("supertest");
-const { userOBJ } = require("../helpers/user");
+const { userInstance } = require("../helpers/user");
 const mongoose = require("mongoose");
 
 // POSITIONS COLLECTION PARAMS
@@ -11,21 +11,15 @@ const mongoose = require("mongoose");
 // @@status!: Enum => ["Attente","Gagnant","Perdu"] => default: "Attente"
 
 const mockPositionData = {
-  users_permissions_user: "",
-  // @@bankroll: Reference id => Bankroll model
-  // @@bet!: reference id => Bet MODEL
-  // @@value!: Decimal
-  // @@outcome!: Decimal => default: 0
-  // @@status!: Enum => ["Attente","Gagnant","Perdu"] => default: "Attente"
+  users_permissions_user: userInstance.userOBJ.id,
+  bankroll: "",
+  bet: "",
+  value: 20,
 };
 
 let positionID = undefined;
 
 describe("Position CRUD", () => {
-  // it("UTILISE le USER module", async (done) => {
-  //   expect(userOBJ).toEqual("truc");
-  //   done();
-  // });
   // it("CREATE position if all required params provided", async (done) => {
   //   const response = await request(strapi.server)
   //     .post("/positions")

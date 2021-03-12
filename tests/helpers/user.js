@@ -11,7 +11,7 @@ class TestUser {
       blocked: false,
     };
 
-    this.userJWT = "not modified yet";
+    this.JWT = "not modified yet";
     this.userID = "not modified yet";
     this.userOBJ = "not modified yet";
   }
@@ -30,6 +30,19 @@ class TestUser {
 
     this.userOBJ = user;
     this.userID = user.id;
+  }
+
+  async getJWT() {
+    const response = await request(strapi.server)
+      .post("/auth/local")
+      .set("accept", "application/json")
+      .set("Content-Type", "application/json")
+      .send({
+        identifier: this.mockUserData.email,
+        password: this.mockUserData.password,
+      });
+
+    this.JWT = response.body.jwt;
   }
 
   static async reset() {

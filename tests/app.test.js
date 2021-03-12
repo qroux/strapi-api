@@ -5,7 +5,6 @@ const mongoose = require("mongoose");
 //////////////////////////////////////////////////////////////////
 // GENERAL TEST SETUP | AUTHENTICATION + AUTHENTICATED REQUESTS //
 //////////////////////////////////////////////////////////////////
-// let testUser;
 
 beforeAll(async (done) => {
   await setupStrapi();
@@ -19,6 +18,11 @@ afterAll(async (done) => {
   done();
 });
 
+it("strapi is defined", (done) => {
+  expect(strapi).toBeDefined();
+  done();
+});
+
 it("GENERATE userIstance using TestUser helper class", async (done) => {
   expect(userInstance).toBeDefined();
   expect(userInstance.userID).toBeDefined();
@@ -27,28 +31,15 @@ it("GENERATE userIstance using TestUser helper class", async (done) => {
   expect(mongoose.Types.ObjectId.isValid(userInstance.userOBJ.id)).toEqual(
     true
   );
-
   done();
 });
 
-it("GENERATE JWT for userInstance for authenticated request", async (done) => {
+it("GENERATE valid JWT for userInstance for authenticated request", async (done) => {
+  await userInstance.getJWT();
+  expect(userInstance.JWT).toBeDefined();
+  expect(userInstance.JWT.length).toEqual(171);
   done();
 });
-
-// it("strapi is defined", (done) => {
-//   expect(strapi).toBeDefined();
-//   done();
-// });
-
-// it("Test user can be fetched with testUserID variable defined", async (done) => {
-//   const user = await strapi.plugins["users-permissions"].services.user.fetch({
-//     id: testUserID,
-//   });
-
-//   expect(testUserID).toBeDefined();
-//   expect(user.email).toEqual("test@test.com");
-//   done();
-// });
 
 //////////////////////////////
 // CONTROLLER TESTS IMPORTS //

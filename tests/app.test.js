@@ -25,8 +25,6 @@ it("GENERATE global strapi instance", (done) => {
 
 it("GENERATE userIstance using TestUser helper class", async (done) => {
   expect(userInstance).toBeDefined();
-  expect(userInstance.userID).toBeDefined();
-  expect(mongoose.Types.ObjectId.isValid(userInstance.userID)).toEqual(true);
   expect(userInstance.userOBJ).toBeDefined();
   expect(mongoose.Types.ObjectId.isValid(userInstance.userOBJ.id)).toEqual(
     true
@@ -48,5 +46,6 @@ it("GENERATE valid JWT for userInstance for authenticated request", async (done)
 require("./user");
 require("./teams");
 require("./matches");
-// require("./bets");
+require("./bets");
+require("./bankrolls");
 // require("./positions");

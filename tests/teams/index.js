@@ -18,7 +18,7 @@ const mockTeamData = {
 let teamId = "";
 
 describe("Team CRUD", () => {
-  it("CREATE team if all required params provided", async (done) => {
+  it("CREATE Team if all required params provided", async (done) => {
     const response = await request(strapi.server)
       .post("/teams")
       .set("accept", "application/json")
@@ -33,7 +33,7 @@ describe("Team CRUD", () => {
     done();
   });
 
-  it(`GET team at id ${teamId}`, async (done) => {
+  it(`GET Team at id ${teamId}`, async (done) => {
     await request(strapi.server)
       .get(`/teams/${teamId}`)
       .set("Authorization", `Bearer ${userInstance.JWT}`)
@@ -47,7 +47,7 @@ describe("Team CRUD", () => {
     done();
   });
 
-  it(`UPDATE team at id ${teamId}`, async (done) => {
+  it(`UPDATE Team at id ${teamId}`, async (done) => {
     const updatedName = "modified mock name";
 
     await request(strapi.server)
@@ -65,7 +65,7 @@ describe("Team CRUD", () => {
     done();
   });
 
-  it(`DELETE team at id ${teamId}`, async (done) => {
+  it(`DELETE Team at id ${teamId}`, async (done) => {
     await request(strapi.server)
       .delete(`/teams/${teamId}`)
       .set("Authorization", `Bearer ${userInstance.JWT}`)

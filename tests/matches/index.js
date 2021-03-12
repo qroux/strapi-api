@@ -1,6 +1,6 @@
 const request = require("supertest");
-const { userJWT } = require("../helpers/user");
 const mongoose = require("mongoose");
+const { userInstance } = require("../helpers/user");
 
 // MATCHES COLLECTION PARAMS
 // @@date!: datetime
@@ -20,12 +20,12 @@ const mockMatchData = {
 let matchID = undefined;
 
 describe("Match CRUD", () => {
-  it("CREATE match if all required params provided", async (done) => {
+  it("CREATE Match if all required params provided", async (done) => {
     const response = await request(strapi.server)
       .post("/matches")
       .set("accept", "application/json")
       .set("Content-Type", "application/json")
-      .set("Authorization", `Bearer ${userJWT}`)
+      .set("Authorization", `Bearer ${userInstance.JWT}`)
       .send(mockMatchData)
       .expect("Content-Type", /json/)
       .expect(200);
@@ -36,10 +36,10 @@ describe("Match CRUD", () => {
     done();
   });
 
-  it("GET match at id", async (done) => {
+  it("GET Match at id", async (done) => {
     await request(strapi.server)
       .get(`/matches/${matchID}`)
-      .set("Authorization", `Bearer ${userJWT}`)
+      .set("Authorization", `Bearer ${userInstance.JWT}`)
       .send()
       .expect("Content-Type", /json/)
       .expect(200)
@@ -60,14 +60,14 @@ describe("Match CRUD", () => {
     done();
   });
 
-  it("UPDATE match at id", async (done) => {
+  it("UPDATE Match at id", async (done) => {
     const updatedSlug = "MODIFIED MOCKED PSG - REAL 29/01/21 21h00";
 
     await request(strapi.server)
       .put(`/matches/${matchID}`)
       .set("accept", "application/json")
       .set("Content-Type", "application/json")
-      .set("Authorization", `Bearer ${userJWT}`)
+      .set("Authorization", `Bearer ${userInstance.JWT}`)
       .send({ ...mockMatchData, slug: updatedSlug })
       .expect("Content-Type", /json/)
       .expect(200)
@@ -81,10 +81,10 @@ describe("Match CRUD", () => {
     done();
   });
 
-  it("DELETE match at id", async (done) => {
+  it("DELETE Match at id", async (done) => {
     await request(strapi.server)
       .delete(`/matches/${matchID}`)
-      .set("Authorization", `Bearer ${userJWT}`)
+      .set("Authorization", `Bearer ${userInstance.JWT}`)
       .send()
       .expect("Content-Type", /json/)
       .expect(200);

@@ -32,9 +32,9 @@ class TestUser {
     this.userID = user.id;
   }
 
-  async reset() {
+  static async reset() {
     await strapi.plugins["users-permissions"].services.user.remove({
-      email: this.mockUserData.email,
+      email: "test@test.com",
     });
 
     this.userJWT = "reset";

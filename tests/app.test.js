@@ -9,13 +9,13 @@ const mongoose = require("mongoose");
 
 beforeAll(async (done) => {
   await setupStrapi();
-  await userInstance.reset();
+  await TestUser.reset();
   await userInstance.generate();
   done();
 });
 
 afterAll(async (done) => {
-  await userInstance.reset();
+  await TestUser.reset();
   done();
 });
 

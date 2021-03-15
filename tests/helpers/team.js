@@ -1,39 +1,13 @@
-const request = require("supertest");
+const getTeamsId = async () => {
+  const teamsId = [];
 
-class TestTeam {
-  constructor() {
-    this.teamOBJ = "not modified yet";
-  }
+  const teams = await strapi
+    .query("teams")
+    .find({ _limit: 2 }, [], { autopopulate: false });
 
-  async generate() {
-    const teams = await strapi.query("teams").find().sort({ _id: 1 }).limit(2);
-    console.log("TEAMS =", teams);
-    // const response = await request(strapi.server)
-    // .post("/auth/local")
-    // .set("accept", "application/json")
-    // .set("Content-Type", "application/json")
-    // .send({
-    //   identifier: this.mockUserData.email,
-    //   password: this.mockUserData.password,
-    // });
+  teams.forEach((team) => teamsId.push(team.id));
 
-    // this.teamOBJ = response.body;
-  }
+  return teamsId;
+};
 
-  static async reset() {
-    const response = await request(strapi.server)
-      .post("/auth/local")
-      .set("accept", "application/json")
-      .set("Content-Type", "application/json")
-      .send({
-        identifier: this.mockUserData.email,
-        password: this.mockUserData.password,
-      });
-
-    this.teamOBJ = "reset";
-  }
-}
-
-const teamInstance = new TestTeam();
-
-module.exports = { TestTeam, teamInstance };
+module.exports = { getTeamsId };

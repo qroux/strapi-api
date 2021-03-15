@@ -1,5 +1,6 @@
 const request = require("supertest");
 const { userInstance } = require("../helpers/user");
+const { getTeamsId } = require("../helpers/team");
 
 // TEAMS COLLECTION PARAMS
 // @@name!: string
@@ -79,12 +80,10 @@ describe("Team CRUD", () => {
 
 describe("Team helper", () => {
   it("Returns the first two teams in DB", async (done) => {
-    const teams = await strapi
-      .query("teams")
-      .find({ _limit: 2 }, [], { autopopulate: false });
+    const teamsId = await getTeamsId();
 
-    expect(teams).toBeDefined();
-    expect(teams.length).toEqual(2);
+    expect(teamsId).toBeDefined();
+    expect(teamsId.length).toEqual(2);
 
     done();
   });

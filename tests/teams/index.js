@@ -76,3 +76,16 @@ describe("Team CRUD", () => {
     done();
   });
 });
+
+describe("Team helper", () => {
+  it("Returns the first two teams in DB", async (done) => {
+    const teams = await strapi
+      .query("teams")
+      .find({ _limit: 2 }, [], { autopopulate: false });
+
+    expect(teams).toBeDefined();
+    expect(teams.length).toEqual(2);
+
+    done();
+  });
+});

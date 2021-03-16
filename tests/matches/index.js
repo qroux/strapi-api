@@ -1,6 +1,8 @@
 const request = require("supertest");
 const mongoose = require("mongoose");
 const { userInstance } = require("../helpers/user");
+const { getTeamsId } = require("../helpers/team");
+const { buildMatch } = require("../helpers/match");
 
 // MATCHES COLLECTION PARAMS
 // @@date!: datetime
@@ -88,6 +90,20 @@ describe("Match CRUD", () => {
       .send()
       .expect("Content-Type", /json/)
       .expect(200);
+
+    done();
+  });
+});
+
+describe("Match helper", () => {
+  it("Returns a mockedMatch or build it if teamsId provided", async (done) => {
+    const teamsId = await getTeamsId();
+
+    expect(teamsId).toBeDefined();
+    expect(teamsId.length).toEqual(2);
+
+    const match = await buildMatch(teamsId);
+    expect(match).toBeDefined();
 
     done();
   });

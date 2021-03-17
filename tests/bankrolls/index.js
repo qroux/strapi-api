@@ -1,6 +1,7 @@
 const request = require("supertest");
 const mongoose = require("mongoose");
 const { userInstance } = require("../helpers/user");
+const { buildBankroll } = require("../helpers/bankroll");
 
 // BANKROLLS COLLECTION PARAMS
 // @@users_permissions_user!: reference id => User MODEL
@@ -11,9 +12,9 @@ const { userInstance } = require("../helpers/user");
 
 const mockBankrollData = {
   users_permissions_user: "600ad9fe262321001541df1e",
-  name: "MOCKED BANKROLL",
-  starter: 500,
-  current_balance: 5000, // Deliberate mistake to test UPDATE Bankroll current_balance from positions sum
+  name: "TEST MOCKED BANKROLL",
+  starter: 700,
+  current_balance: 7000, // Deliberate mistake to test UPDATE Bankroll current_balance from positions sum
 };
 
 let bankrollID = undefined;
@@ -98,6 +99,22 @@ describe("Bankroll CRUD", () => {
       .send()
       .expect("Content-Type", /json/)
       .expect(200);
+
+    done();
+  });
+});
+
+describe("Bankroll helper", () => {
+  it("Builds bankroll without userId provided", async (done) => {
+    const bankroll = await buildBankroll();
+
+    expect(bankroll).toBeDefined();
+    expect(bankroll.id).toBeDefined();
+    expect(bankroll.name).toBeDefined();
+    expect(bankroll.users_permissions_user).toBeDefined();
+    expect(
+      mongoose.Types.ObjectId.isValid(bankroll.users_permissions_user)
+    ).toEqual(true);
 
     done();
   });

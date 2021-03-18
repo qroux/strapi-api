@@ -1,6 +1,7 @@
 const request = require("supertest");
 const mongoose = require("mongoose");
 const { userInstance } = require("../helpers/user");
+const { buildBet } = require("../helpers/bet");
 
 // BETS COLLECTION PARAMS
 // @@type!: String
@@ -94,6 +95,17 @@ describe("Bet CRUD", () => {
       .send()
       .expect("Content-Type", /json/)
       .expect(200);
+
+    done();
+  });
+});
+
+describe("Bet helper", () => {
+  it("Builds bet based on DB match record", async (done) => {
+    const bet = await buildBet();
+
+    expect(bet).toBeDefined();
+    expect(bet.type).toEqual("HELP MOCKED BET TYPE");
 
     done();
   });

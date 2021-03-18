@@ -1,6 +1,7 @@
 const request = require("supertest");
 const { userInstance } = require("../helpers/user");
 const mongoose = require("mongoose");
+const
 
 // POSITIONS COLLECTION PARAMS
 // @@users_permissions_user: Reference id => User model
@@ -20,26 +21,26 @@ const mockPositionData = {
 let positionID = undefined;
 
 describe("Position CRUD", () => {
-  // it("CREATE position if all required params provided", async (done) => {
-  //   const response = await request(strapi.server)
-  //     .post("/positions")
-  //     .set("accept", "application/json")
-  //     .set("Content-Type", "application/json")
-  //     .set("Authorization", `Bearer ${userJWT}`)
-  //     .send(mockPositionData)
-  //     .expect("Content-Type", /json/)
-  //     .expect(200)
-  //     .then((res) => {
-  //       expect(res.body.type).toEqual(mockPositionData.type);
-  //       expect(res.body.match.id).toEqual(mockPositionData.match); // match reference populated
-  //       expect(res.body.odds).toEqual(mockPositionData.odds);
-  //       expect(res.body.bookmaker).toEqual(mockPositionData.bookmaker);
-  //       expect(res.body.status).toEqual(mockPositionData.status);
-  //       positionID = res.body.id;
-  //     });
-  //   expect(positionID).toBeDefined();
-  //   done();
-  // });
+  it("CREATE position if all required params provided", async (done) => {
+    const response = await request(strapi.server)
+      .post("/positions")
+      .set("accept", "application/json")
+      .set("Content-Type", "application/json")
+      .set("Authorization", `Bearer ${userJWT}`)
+      .send(mockPositionData)
+      .expect("Content-Type", /json/)
+      .expect(200)
+      .then((res) => {
+        expect(res.body.type).toEqual(mockPositionData.type);
+        expect(res.body.match.id).toEqual(mockPositionData.match); // match reference populated
+        expect(res.body.odds).toEqual(mockPositionData.odds);
+        expect(res.body.bookmaker).toEqual(mockPositionData.bookmaker);
+        expect(res.body.status).toEqual(mockPositionData.status);
+        positionID = res.body.id;
+      });
+    expect(positionID).toBeDefined();
+    done();
+  });
   // it("GET bet at id", async (done) => {
   //   await request(strapi.server)
   //     .get(`/positions/${positionID}`)

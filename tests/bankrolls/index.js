@@ -118,4 +118,19 @@ describe("Bankroll helper", () => {
 
     done();
   });
+
+  // it("Builds bankroll WITH userId provided", async (done) => {
+  //   const userId = "6018531eaf2fec001587f1ed";
+  //   const bankroll = await buildBankroll(userId);
+
+  //   expect(bankroll).toBeDefined();
+  //   expect(bankroll.id).toBeDefined();
+  //   expect(bankroll.name).toBeDefined();
+  //   expect(bankroll.users_permissions_user).toBeDefined();
+  //   expect(
+  //     mongoose.Types.ObjectId.isValid(bankroll.users_permissions_user)
+  //   ).toEqual(true);
+
+  //   done();
+  // });
 });

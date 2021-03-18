@@ -46,6 +46,6 @@ it("GENERATE valid JWT for userInstance for authenticated request", async (done)
 require("./user");
 require("./teams");
 require("./matches");
-// require("./bets");
+require("./bets");
 require("./bankrolls");
-// require("./positions");
+require("./positions");

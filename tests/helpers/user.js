@@ -3,7 +3,7 @@ const request = require("supertest");
 class TestUser {
   constructor() {
     this.mockUserData = {
-      username: "test",
+      username: "HELPER test user",
       email: "test@test.com",
       provider: "local",
       password: "1234abc",

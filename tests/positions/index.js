@@ -45,7 +45,7 @@ describe("Position CRUD", () => {
     expect(positionID).toBeDefined();
     done();
   });
-  it("GET bet at id", async (done) => {
+  it("GET position at id", async (done) => {
     const positionParams = await buildPositionParams();
 
     await request(strapi.server)
@@ -62,7 +62,7 @@ describe("Position CRUD", () => {
       });
     done();
   });
-  it("UPDATE bet at id", async (done) => {
+  it("UPDATE position at id", async (done) => {
     const positionParams = await buildPositionParams();
     const updatedValue = 666;
 
@@ -82,7 +82,7 @@ describe("Position CRUD", () => {
       });
     done();
   });
-  it("DELETE bet at id", async (done) => {
+  it("DELETE position at id", async (done) => {
     await request(strapi.server)
       .delete(`/positions/${positionID}`)
       .set("Authorization", `Bearer ${userInstance.JWT}`)

@@ -1,7 +1,7 @@
 const request = require("supertest");
 const { userInstance } = require("../helpers/user");
 const mongoose = require("mongoose");
-const { buildPositionParams } = require("../helpers/position");
+const { buildPositionParams, createPosition } = require("../helpers/position");
 
 // POSITIONS COLLECTION PARAMS
 // @@users_permissions_user: Reference id => User model
@@ -99,6 +99,17 @@ describe("Position help", () => {
 
     expect(positionParams).toBeDefined();
 
+    done();
+  });
+});
+
+describe("Related document | Bankroll update on Position CRUD", () => {
+  it("ON Position.create() => add position to Bankroll.positions (Array of position.id)", async (done) => {
+    const position = await createPosition();
+
+    // position fully populated => position.bankroll.id instead of position.bankroll
+    expect(position.bankroll).toBeDefined();
+    expect(position.bankroll.positions.length).toEqual("truc");
     done();
   });
 });

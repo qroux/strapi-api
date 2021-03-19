@@ -2,6 +2,7 @@ const request = require("supertest");
 const { userInstance } = require("../helpers/user");
 const mongoose = require("mongoose");
 const { buildPositionParams, createPosition } = require("../helpers/position");
+const { getBankroll, resetBankrollPositions } = require("../helpers/bankroll");
 
 // POSITIONS COLLECTION PARAMS
 // @@users_permissions_user: Reference id => User model
@@ -105,11 +106,18 @@ describe("Position help", () => {
 
 describe("Related document | Bankroll update on Position CRUD", () => {
   it("ON Position.create() => add position to Bankroll.positions (Array of position.id)", async (done) => {
-    const position = await createPosition();
+    await resetBankrollPositions("60537fee925f723888e585cf");
 
+    const position = await createPosition();
     // position fully populated => position.bankroll.id instead of position.bankroll
     expect(position.bankroll).toBeDefined();
-    expect(position.bankroll.positions.length).toEqual("truc");
+    expect(position.bankroll.positions.length).toEqual(0);
+
+    const bankroll = await getBankroll(position.bankroll.id);
+    expect(bankroll.positions.length).toEqual(1);
+
+    await strapi.services.positions.delete({ id: position.id });
+
     done();
   });
 });

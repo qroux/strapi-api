@@ -120,6 +120,9 @@ describe("Related document | Bankroll update on Position CRUD", () => {
   });
 
   it("ON Position.delete() => remove position from Bankroll.positions (Array of position.id)", async (done) => {
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // MongoDB automatically removes reference to deleted document. No additional action required to update Bankroll.positions[] //
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     const bankroll = await getBankroll("60537fee925f723888e585cf");
     expect(bankroll).toBeDefined();
 

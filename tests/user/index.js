@@ -23,8 +23,6 @@ describe("User CRUD", () => {
   it("should return users data from JWT token", async (done) => {
     await request(strapi.server)
       .get("/users/me")
-      .set("accept", "application/json")
-      .set("Content-Type", "application/json")
       .set("Authorization", "Bearer " + userInstance.JWT)
       .expect("Content-Type", /json/)
       .expect(200)

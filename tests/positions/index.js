@@ -116,7 +116,27 @@ describe("Related document | Bankroll update on Position CRUD", () => {
     const bankroll = await getBankroll(position.bankroll.id);
     expect(bankroll.positions.length).toEqual(1);
 
-    await strapi.services.positions.delete({ id: position.id });
+    done();
+  });
+
+  it("ON Position.delete() => remove position from Bankroll.positions (Array of position.id)", async (done) => {
+    const bankroll = await getBankroll("60537fee925f723888e585cf");
+    expect(bankroll).toBeDefined();
+
+    const id = bankroll.positions[0].id;
+
+    await request(strapi.server)
+      .delete(`/positions/${id}`)
+      .set("accept", "application/json")
+      .set("Content-Type", "application/json")
+      .set("Authorization", `Bearer ${userInstance.JWT}`)
+      .send()
+      .expect("Content-Type", /json/)
+      .expect(200);
+
+    const updatedBankroll = await getBankroll("60537fee925f723888e585cf");
+    expect(updatedBankroll).toBeDefined();
+    expect(updatedBankroll.positions.length).toEqual(0);
 
     done();
   });

@@ -43,4 +43,15 @@ const createPosition = async () => {
   return sanitizeEntity(response.body, { model: strapi.models.positions });
 };
 
-module.exports = { buildPositionParams, createPosition };
+const deletePosition = async (id) => {
+  const response = await request(strapi.server)
+    .delete(`/positions/${id}`)
+    .set("accept", "application/json")
+    .set("Content-Type", "application/json")
+    .set("Authorization", `Bearer ${userInstance.JWT}`)
+    .send()
+    .expect("Content-Type", /json/)
+    .expect(200);
+};
+
+module.exports = { buildPositionParams, createPosition, deletePosition };

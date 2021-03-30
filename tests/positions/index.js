@@ -27,7 +27,7 @@ describe("Position CRUD", () => {
   it("CREATE position if all required params provided", async (done) => {
     const positionParams = await buildPositionParams();
 
-    const response = await request(strapi.server)
+    await request(strapi.server)
       .post("/positions")
       .set("accept", "application/json")
       .set("Content-Type", "application/json")
@@ -40,7 +40,6 @@ describe("Position CRUD", () => {
         expect(res.body.bet.id).toEqual(positionParams.bet); // match reference populated
         expect(res.body.odds).toEqual(positionParams.odds);
         expect(res.body.bookmaker).toEqual(positionParams.bookmaker);
-        expect(res.body.status).toEqual(positionParams.status);
         positionID = res.body.id;
       });
     expect(positionID).toBeDefined();
@@ -59,7 +58,6 @@ describe("Position CRUD", () => {
         expect(res.body.type).toEqual(positionParams.type);
         expect(res.body.odds).toEqual(positionParams.odds);
         expect(res.body.bookmaker).toEqual(positionParams.bookmaker);
-        expect(res.body.status).toEqual(positionParams.status);
       });
     done();
   });
@@ -79,7 +77,6 @@ describe("Position CRUD", () => {
         expect(res.body.value).toEqual(updatedValue);
         expect(res.body.odds).toEqual(positionParams.odds);
         expect(res.body.bookmaker).toEqual(positionParams.bookmaker);
-        expect(res.body.status).toEqual(positionParams.status);
       });
     done();
   });
@@ -103,6 +100,23 @@ describe("Position help", () => {
     done();
   });
 });
+
+// describe("Related document | position.bet.status accessible", () => {
+//   it("GET bankrolls?users_permissions_user=${user_id} => Bankroll.positions[0].bet.status populated", async () => {
+//     const positionParams = await buildPositionParams();
+
+//     const response = await request(strapi.server)
+//       .get(
+//         `/bankrolls?users_permissions_user=${positionParams.users_permissions_user}`
+//       )
+//       .set("Authorization", `Bearer ${userInstance.JWT}`)
+//       .send()
+//       .expect("Content-Type", /json/)
+//       .expect(200);
+
+//     expect(response.body).toEqual("truc");
+//   });
+// });
 
 describe("Related document | Bankroll update on Position CRUD", () => {
   it("ON Position.create() => add position to Bankroll.positions (Array of position.id)", async (done) => {

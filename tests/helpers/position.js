@@ -22,7 +22,6 @@ const buildPositionParams = async () => {
     bankroll: bankroll.id,
     bet: bet.id,
     value: 20,
-    status: "Attente",
   };
 
   return mockPositionData;

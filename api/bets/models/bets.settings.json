@@ -31,13 +31,13 @@
     "status": {
       "type": "enumeration",
       "enum": [
-        "enCours",
-        "Succes",
-        "Echec",
-        "Report"
+        "pending",
+        "win",
+        "lose",
+        "reported"
       ],
       "required": true,
-      "default": "enCours"
+      "default": "pending"
     }
   }
 }

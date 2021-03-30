@@ -15,7 +15,7 @@ const mockBetData = {
   match: "60130ff61e40b7688d2503b0", // PSG - REAL 29 janv 2021
   odds: 1.5,
   bookmaker: "Betclick",
-  status: "enCours",
+  status: "pending",
 };
 
 let betID = undefined;

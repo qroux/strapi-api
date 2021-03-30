@@ -9,10 +9,7 @@ module.exports = {
     try {
       bankrolls = await strapi
         .query("bankrolls")
-        .find(ctx.query, [
-          "positions",
-          { path: "bet", populate: [{ path: "match" }] },
-        ]);
+        .find(ctx.query, ["positions", { path: "positions", populate: "bet" }]);
     } catch (err) {
       return err;
     }

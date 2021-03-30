@@ -27,16 +27,6 @@
       "type": "decimal",
       "default": 0
     },
-    "status": {
-      "type": "enumeration",
-      "enum": [
-        "pending",
-        "win",
-        "lose"
-      ],
-      "default": "pending",
-      "required": true
-    },
     "bankroll": {
       "model": "bankrolls"
     }

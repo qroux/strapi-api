@@ -35,10 +35,10 @@ module.exports = {
       );
 
       bankroll.positions.map((position) => {
-        if (position.bet.status === "Succes") {
+        if (position.bet.status === "win") {
           sum += position.value * position.bet.odds;
         }
-        if (position.bet.status === "Echec") {
+        if (position.bet.status === "lose") {
           sum -= position.value;
         }
       });

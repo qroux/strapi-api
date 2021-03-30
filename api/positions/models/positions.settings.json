@@ -30,11 +30,11 @@
     "status": {
       "type": "enumeration",
       "enum": [
-        "Attente",
-        "Gagnant",
-        "Perdu"
+        "pending",
+        "win",
+        "lose"
       ],
-      "default": "Attente",
+      "default": "pending",
       "required": true
     },
     "bankroll": {

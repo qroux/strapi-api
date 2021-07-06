@@ -15,7 +15,7 @@ module.exports = {
       entities = await strapi.query("bets").find(ctx.query, {
         path: "match",
         populate: [{ path: "home" }, { path: "visitor" }],
-        _sort: "createdAt:asc",
+        _sort: "createdAt:dsc",
       });
     } catch (err) {
       return err;

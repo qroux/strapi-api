@@ -12,13 +12,11 @@ module.exports = {
     let entities;
 
     try {
-      entities = await strapi
-        .query("bets")
-        .find(ctx.query, {
-          path: "match",
-          populate: [{ path: "home" }, { path: "visitor" }],
-        })
-        .sort({ createdAt: -1 });
+      entities = await strapi.query("bets").find(ctx.query, {
+        path: "match",
+        populate: [{ path: "home" }, { path: "visitor" }],
+        _sort: "createdAt:desc",
+      });
     } catch (err) {
       return err;
     }
